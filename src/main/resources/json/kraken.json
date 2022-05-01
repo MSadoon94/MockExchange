@@ -1,0 +1,15 @@
+{
+  "url": "/mock/kraken",
+  "port": 8081,
+  "endpoint": {
+    "assetPair": "/mock/kraken/0/public/AssetPairs**",
+    "balance": "/mock/kraken/0/private/Balance"
+  },
+  "balance": {
+    "error": [],
+    "result": {
+      "ZUSD": "17.6158",
+      "XXBT": "101.1908877900"
+    }
+  }
+}
