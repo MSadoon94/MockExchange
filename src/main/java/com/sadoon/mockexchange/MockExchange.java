@@ -1,5 +1,6 @@
 package com.sadoon.mockexchange;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.fabric8.mockwebserver.DefaultMockServer;
 
 public class MockExchange {
@@ -20,20 +21,20 @@ public class MockExchange {
     }
 
     private void setEndpoints() {
-        mockExchange.expect()
-                .withPath(getEndpoint("assetPair"))
-                .andReturn(200, fileUtil.getNode("balance").toString())
-                .withHeader("Content-Type: application/json")
-                .always();
-
-        mockExchange.expect()
-                .withPath(getEndpoint("balance"))
-                .andReturn(200, fileUtil.getNode("balance").toString())
-                .withHeader("Content-Type: application/json")
-                .always();
+        createAlwaysRespondingEndpoint("assetPairsNode", "assetPairs");
+        createAlwaysRespondingEndpoint("balanceNode", "balance");
     }
 
     private String getEndpoint(String endpoint) {
         return fileUtil.getNode("endpoint").get(endpoint).asText();
+    }
+
+    private void createAlwaysRespondingEndpoint(String nodeName, String endpointName){
+        JsonNode node = fileUtil.getNode(nodeName);
+        mockExchange.expect()
+                .withPath(getEndpoint(endpointName))
+                .andReturn(node.get("status").asInt(), node.get(endpointName).toString())
+                .withHeader("Content-Type: application/json")
+                .always();
     }
 }

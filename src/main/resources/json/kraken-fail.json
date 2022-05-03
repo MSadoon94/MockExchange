@@ -1,0 +1,26 @@
+{
+  "url": "/fail/mock/kraken",
+  "port": 8082,
+  "endpoint": {
+    "assetPairs": "/fail/mock/kraken/0/public/AssetPairs?pair=BTCUS",
+    "balance": "/fail/mock/kraken/0/private/Balance"
+  },
+  "assetPairsNode": {
+    "status": 200,
+    "assetPairs": {
+      "error": [
+        "EQuery:Unknown asset pair"
+      ],
+      "result": {}
+    }
+  },
+  "balanceNode": {
+    "status": 200,
+    "balance": {
+      "error": [
+        "EAPI:Invalid key"
+      ],
+      "result": {}
+    }
+  }
+}
