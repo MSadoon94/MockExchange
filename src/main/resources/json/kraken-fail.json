@@ -3,7 +3,9 @@
   "port": 8082,
   "endpoint": {
     "assetPairs": "/fail/mock/kraken/0/public/AssetPairs?pair=BTCUS",
-    "balance": "/fail/mock/kraken/0/private/Balance"
+    "balance": "/fail/mock/kraken/0/private/Balance",
+    "tradeVolume": "/fail/mock/kraken/0/private/TradeVolume?pair=BTC/USD",
+    "ws": "/fail/mock/ws-kraken"
   },
   "assetPairsNode": {
     "status": 200,
@@ -21,6 +23,25 @@
         "EAPI:Invalid key"
       ],
       "result": {}
+    }
+  },
+  "tradeVolumeNode": {
+    "status": 200,
+    "tradeVolume": {
+      "error": [
+        "EQuery:Unknown asset pair"
+      ],
+      "result": {}
+    }
+  },
+  "wsTickerNode": {
+    "first": {
+      "errorMessage": "Malformed request",
+      "event": "error"
+    },
+    "second": {
+      "errorMessage": "Malformed request",
+      "event": "error"
     }
   }
 }

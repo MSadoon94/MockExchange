@@ -3,14 +3,16 @@
   "port": 8081,
   "endpoint": {
     "assetPairs": "/mock/kraken/0/public/AssetPairs?pair=BTC/USD",
-    "balance": "/mock/kraken/0/private/Balance"
+    "balance": "/mock/kraken/0/private/Balance",
+    "tradeVolume": "/mock/kraken/0/private/TradeVolume?pair=BTC/USD",
+    "ws": "/mock/ws-kraken"
   },
   "assetPairsNode": {
     "status": 200,
     "assetPairs": {
       "error": [],
       "result": {
-        "XXBTZUSD": {
+        "BTC/USD": {
           "altname": "XBTUSD",
           "wsname": "XBT/USD",
           "aclass_base": "currency",
@@ -126,5 +128,127 @@
         "XXBT": "101.1908877900"
       }
     }
+  },
+  "tradeVolumeNode": {
+    "status": 200,
+    "tradeVolume": {
+      "error": [],
+      "result": {
+        "currency": "ZUSD",
+        "volume": "200709587.4223",
+        "fees": {
+          "XXBTZUSD": {
+            "fee": "0.1000",
+            "minfee": "0.1000",
+            "maxfee": "0.2600",
+            "nextfee": null,
+            "nextvolume": null,
+            "tiervolume": "10000000.0000"
+          }
+        },
+        "fees_maker": {
+          "XXBTZUSD": {
+            "fee": "0.0000",
+            "minfee": "0.0000",
+            "maxfee": "0.1600",
+            "nextfee": null,
+            "nextvolume": null,
+            "tiervolume": "10000000.0000"
+          }
+        }
+      }
+    }
+  },
+  "wsTickerNode": {
+    "first": [
+      0,
+      {
+        "a": [
+          "5525.40000",
+          1,
+          "1.000"
+        ],
+        "b": [
+          "5525.10000",
+          1,
+          "1.000"
+        ],
+        "c": [
+          "5525.10000",
+          "0.00398963"
+        ],
+        "h": [
+          "5783.00000",
+          "5783.00000"
+        ],
+        "l": [
+          "5505.00000",
+          "5505.00000"
+        ],
+        "o": [
+          "5760.70000",
+          "5763.40000"
+        ],
+        "p": [
+          "5631.44067",
+          "5653.78939"
+        ],
+        "t": [
+          11493,
+          16267
+        ],
+        "v": [
+          "2634.11501494",
+          "3591.17907851"
+        ]
+      },
+      "ticker",
+      "BTC/USD"
+    ],
+    "second": [
+      0,
+      {
+        "a": [
+          "5525.40000",
+          1,
+          "1.000"
+        ],
+        "b": [
+          "5519.474900",
+          1,
+          "1.000"
+        ],
+        "c": [
+          "5525.10000",
+          "0.00398963"
+        ],
+        "h": [
+          "5783.00000",
+          "5783.00000"
+        ],
+        "l": [
+          "5505.00000",
+          "5505.00000"
+        ],
+        "o": [
+          "5760.70000",
+          "5763.40000"
+        ],
+        "p": [
+          "5631.44067",
+          "5653.78939"
+        ],
+        "t": [
+          11493,
+          16267
+        ],
+        "v": [
+          "2634.11501494",
+          "3591.17907851"
+        ]
+      },
+      "ticker",
+      "BTC/USD"
+    ]
   }
 }
