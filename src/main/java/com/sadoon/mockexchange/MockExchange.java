@@ -1,13 +1,19 @@
 package com.sadoon.mockexchange;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.fabric8.mockwebserver.DefaultMockServer;
 import io.fabric8.mockwebserver.dsl.EventDoneable;
 import io.fabric8.mockwebserver.dsl.TimesOnceableOrHttpHeaderable;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Random;
+
 public class MockExchange {
     private DefaultMockServer mockExchange;
     private JsonFileUtil fileUtil;
+    private Random random = new Random();
 
     public MockExchange(JsonFileUtil fileUtil) {
         this.fileUtil = fileUtil;
@@ -35,12 +41,22 @@ public class MockExchange {
                 .andUpgradeToWebSocket()
                 .open();
 
-        websocket.waitFor(2000).andEmit(fileUtil.getNode("wsTickerNode").get("first").toString());
-        websocket.waitFor(5000).andEmit(fileUtil.getNode("wsTickerNode").get("second").toString());
+        for (int i = 10000; i <= 50000; i += 1000) {
+            websocket.waitFor(i).andEmit(createRandomTicker().toString());
+        }
 
         websocket
                 .done()
                 .always();
+    }
+
+    private JsonNode createRandomTicker() {
+        JsonNode node = fileUtil.getNode("wsTickerNode").get("template");
+        ((ObjectNode) node.get(1)).replace("b",
+                fileUtil.createArrayNode().add(
+                        BigDecimal.valueOf(random.nextDouble(70, 100))
+                                .setScale(2, RoundingMode.HALF_UP)));
+        return node;
     }
 
     private String getEndpoint(String endpoint) {
